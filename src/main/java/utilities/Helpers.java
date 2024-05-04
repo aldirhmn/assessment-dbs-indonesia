@@ -30,6 +30,15 @@ public class Helpers {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(object));
     }
 
+    public static boolean isElementPresent(By object){
+        try {
+            driver.findElement(object);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
     static{
         try (FileInputStream fileInputStream = new FileInputStream("src/test/resources/config/config.properties")){
             properties = new Properties();

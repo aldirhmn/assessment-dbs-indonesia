@@ -2,6 +2,7 @@ package pages;
 
 import dev.failsafe.internal.util.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utilities.Helpers;
@@ -13,6 +14,7 @@ public class LoginPages {
     private By field_password = By.id("password");
     private By button_login = By.xpath("//button[@type='submit']");
     private By text_homePage = By.cssSelector(".subheader");
+    private By text_errors = By.id("flash");
 
     public LoginPages(WebDriver driver){
         this.driver = driver;
@@ -37,15 +39,14 @@ public class LoginPages {
     public void homePage(){
         Helpers.waitForElementVisible(text_homePage, 60);
         Helpers.takeScreenshot();
+        Helpers.isElementPresent(text_homePage);
         System.out.println(driver.findElement(text_homePage).getText());
         driver.quit();
     }
 
-    public void getMessageContains(String message){
-        if (driver.getPageSource().contains(message)){
-            System.out.println("The Message was Found");
-        } else {
-            System.out.println("The Message was Not Found");
-        }
+    public void errorMessage(){
+        Helpers.waitForElementVisible(text_errors, 60);
+        Helpers.takeScreenshot();
+        Helpers.isElementPresent(text_errors);
     }
 }

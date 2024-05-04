@@ -44,11 +44,10 @@ public class LoginSteps {
     @Then("User successfully Login and direct to HomePage")
     public void directHomePage(){
         loginPages.homePage();
-        loginPages.getMessageContains("You logged into a secure area!");
     }
 
     @Then("User failed Login and get error message")
     public void failedLogin(){
-        loginPages.getMessageContains("Your username is invalid!");
+        loginPages.errorMessage();
     }
 }
